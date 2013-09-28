@@ -1,0 +1,11 @@
+<package>
+  <description brief="Approximate Nearest Neighbor Searching (ANN)">
+    ANN is a library written in C++, which supports data structures and algorithms for both exact and approximate nearest neighbor searching in arbitrarily high dimensions. 
+  </description>
+  <license>LGPL</license>
+  <author>David M. Mount and Sunil Arya</author>
+  <export>
+    <cpp lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib -lANN_1_1_1" cflags="-I${prefix}/include"/>
+    <python path="${prefix}/src/lib/python"/>
+  </export>
+</package>
