@@ -1,0 +1,14 @@
+<launch>
+    <node pkg="topic_tools" type="throttle" name="throttle_joint_states" args="messages joint_states 4.0"/>
+
+    <node pkg="pr2_collision_checker" type="testPR2CollisionChecker" name="pr2_collision_checker" output="screen" >
+        <rosparam file="$(find pr2_collision_checker)/config/pr2_both_arms.yaml" command="load"/>
+        <rosparam file="$(find pr2_collision_checker)/config/pr2_body.yaml" command="load"/>
+
+        <param name="planner/left_arm_description_file" value="$(find sbpl_arm_planner)/config/pr2_left_arm.cfg"/>
+        <param name="planner/right_arm_description_file" value="$(find sbpl_arm_planner)/config/pr2_right_arm.cfg"/>
+
+        <remap from="collision_map_occ" to="collision_map_out"/>
+    </node>
+
+</launch>

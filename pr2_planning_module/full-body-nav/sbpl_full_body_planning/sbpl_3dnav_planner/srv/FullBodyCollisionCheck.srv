@@ -1,0 +1,5 @@
+arm_navigation_msgs/RobotState[] robot_states
+
+---
+
+arm_navigation_msgs/ArmNavigationErrorCodes[] error_codes

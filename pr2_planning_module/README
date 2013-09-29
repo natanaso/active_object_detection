@@ -1,0 +1,24 @@
+
+
+sbpl:
+1. To get:
+	git clone https://kforge.ros.org/sbpl/sbpl
+2. To update:
+	git remote update
+
+1. To get:
+	svn co https://code.ros.org/svn/wg-ros-pkg/stacks/motion_planners/trunk/sbpl/
+2. To update:
+	svn up
+
+
+
+full-body-nav:
+1. To get:
+	git clone https://sbpl.pc.cs.cmu.edu/redmine/people/mike/full-body-nav.git
+2. To update:
+	git remote update
+3. Comment out eigen dependency in sbpl_arm_planner manifest.xml
+
+
+

@@ -1,0 +1,31 @@
+<package>
+  <description brief="pr2_plan_utils">
+
+     pr2_plan_utils
+
+  </description>
+  <author>natanaso</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/pr2_plan_utils</url>
+
+  <depend package="move_base_msgs"/>
+  <depend package="rospy"/>
+  <depend package="actionlib"/>
+  <depend package="kinematics_msgs"/>
+  <depend package="pr2_controllers_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="visualization_msgs"/>
+  <depend package="arm_navigation_msgs"/>
+  <depend package="pr2_mechanism_msgs"/>
+  <depend package="interpolated_ik_motion_planner"/>
+  <depend package="std_srvs"/>
+  <depend package="object_manipulation_msgs"/>
+  <depend package="sbpl_3dnav_planner"/>
+  <depend package="state_transformer"/>
+  <depend package="nav_msgs"/>
+  <depend package="pose_follower_3d"/>
+</package>
+
+

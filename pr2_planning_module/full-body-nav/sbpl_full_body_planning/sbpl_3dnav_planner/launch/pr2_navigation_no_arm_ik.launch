@@ -1,0 +1,72 @@
+<launch>
+    <include file="$(find pr2_machine)/pr2.machine"/>
+    
+    <!-- map server (publishing empty map) -->
+    <!-- <node pkg="map_server" type="map_server" name="map_server" args="$(find sbpl_3dnav_planner)/maps/nsh1612.pgm 0.05"/> -->
+    <!-- load ik -->
+<!--
+    <include file="$(find pr2_arm_navigation_kinematics)/launch/pr2_ik_rarm_node.launch"/>
+    <include file="$(find pr2_arm_navigation_kinematics)/launch/pr2_ik_larm_node.launch"/>
+-->
+
+    <!-- <include file="$(find sbpl_3dnav_planner)/launch/sbpl_planning_both_arms.launch"/> -->
+    <node pkg="topic_tools" type="throttle" name="throttle_joint_states" args="messages joint_states 4.0"/>
+
+    <!-- launch move_base with sbpl_3dnav_planner as a plugin -->
+    <node pkg="move_base" type="move_base" name="move_base" output="screen" >
+        <param name="base_global_planner" value="Sbpl3DNavPlanner"/>
+        <rosparam file="$(find sbpl_full_body_planner)/config/pr2_both_arms.yaml" command="load"/>
+        <rosparam file="$(find sbpl_full_body_planner)/config/pr2_body.yaml" command="load"/>
+
+        <param name="planner/motion_primitive_file" value="$(find sbpl_full_body_planner)/config/pr2-32.mprim"/>
+        <param name="planner/base_motion_primitive_file" value="$(find sbpl_full_body_planner)/config/full_body_base.mprim"/>
+        <param name="planner/left_arm_description_file" value="$(find sbpl_arm_planner)/config/pr2_left_arm.cfg"/>
+        <param name="planner/right_arm_description_file" value="$(find sbpl_arm_planner)/config/pr2_right_arm.cfg"/>
+
+        <remap from="cmd_vel" to="base_controller/command"/>
+        <remap from="collision_map_occ" to="collision_map_out"/>
+        
+        <rosparam file="$(find sbpl_3dnav_planner)/config/sbpl_global_params.yaml" command="load"/>
+        <rosparam file="$(find sbpl_3dnav_planner)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find sbpl_3dnav_planner)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find sbpl_3dnav_planner)/config/local_costmap_params_close.yaml" command="load" />
+        <rosparam file="$(find sbpl_3dnav_planner)/config/global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find sbpl_3dnav_planner)/config/base_local_planner_trajectory.yaml" command="load" /> 
+        <rosparam file="$(find sbpl_3dnav_planner)/config/base_local_planner_poses.yaml" command="load" />
+    </node>
+
+    <!-- localization -->
+    <!-- <node pkg="amcl" type="amcl" name="amcl">
+        <remap from="scan" to="base_scan" />
+   	    <param name="base_frame_id" value="base_footprint"/>
+   	    <param name="odom_model_type" value="omni"/>
+   	    <param name="odom_alpha5" value="0.1"/>
+   	    <param name="transform_tolerance" value="0.2" />
+   	    <param name="gui_publish_rate" value="10.0"/>
+   	    <param name="laser_max_beams" value="30"/>
+   	    <param name="min_particles" value="500"/>
+   	    <param name="max_particles" value="5000"/>
+   	    <param name="kld_err" value="0.05"/>
+   	    <param name="kld_z" value="0.99"/>
+   	    <param name="odom_alpha1" value="0.2"/>
+   	    <param name="odom_alpha2" value="0.2"/>
+   	    <param name="odom_alpha3" value="0.8"/>
+   	    <param name="odom_alpha4" value="0.2"/>
+   	    <param name="laser_z_hit" value="0.5"/>
+   	    <param name="laser_z_short" value="0.05"/>
+   	    <param name="laser_z_max" value="0.05"/>
+   	    <param name="laser_z_rand" value="0.5"/>
+   	    <param name="laser_sigma_hit" value="0.2"/>
+   	    <param name="laser_lambda_short" value="0.1"/>
+   	    <param name="laser_lambda_short" value="0.1"/>
+   	    <param name="laser_model_type" value="likelihood_field"/>
+   	    <param name="laser_likelihood_max_dist" value="2.0"/>
+   	    <param name="update_min_d" value="0.2"/>
+   	    <param name="update_min_a" value="0.5"/>
+   	    <param name="odom_frame_id" value="odom_combined"/>
+   	    <param name="resample_interval" value="1"/>
+   	    <param name="transform_tolerance" value="0.1"/>
+   	    <param name="recovery_alpha_slow" value="0.0"/>
+   	    <param name="recovery_alpha_fast" value="0.0"/>
+    </node> -->
+</launch>

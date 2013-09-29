@@ -1,0 +1,229 @@
+degrees_of_freedom: 8
+xyz_resolution(meters): 0.02
+rpy_resolution(degrees): 5.625
+free_angle_resolution(degrees): 2.00
+
+type: long_distance
+group: 1
+id: 1
+end_coords(cells): 1 1 -1 0 0 0 0 0
+intermediate_steps: 1
+0.0200 0.0200 -0.0200 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 2
+end_coords(cells): 1 0 -1 0 0 0 0 0
+intermediate_steps: 1
+0.0200 0.0000 -0.0200 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 3
+end_coords(cells): 1 -1 -1 0 0 0 0 0
+intermediate_steps: 1
+0.0200 -0.0200 -0.0200 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 4
+end_coords(cells): 0 1 -1 0 0 0 0 0
+intermediate_steps: 1
+0.0000 0.0200 -0.0200 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 5
+end_coords(cells): 0 0 -1 0 0 0 0 0
+intermediate_steps: 1
+0.0000 0.0000 -0.0200 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 6
+end_coords(cells): 0 -1 -1 0 0 0 0 0
+intermediate_steps: 1
+0.0000 -0.0200 -0.0200 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 7
+end_coords(cells): -1 -1 -1 0 0 0 0 0
+intermediate_steps: 1
+-0.0200 -0.0200 -0.0200 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 8
+end_coords(cells): -1 0 -1 0 0 0 0 0
+intermediate_steps: 1
+-0.0200 0.0000 -0.0200 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 9
+end_coords(cells): -1 1 -1 0 0 0 0 0
+intermediate_steps: 1
+-0.0200 0.0200 -0.0200 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 10
+end_coords(cells): 1 1 0 0 0 0 0 0
+intermediate_steps: 1
+0.0200 0.0200 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 11
+end_coords(cells): 1 0 0 0 0 0 0 0
+intermediate_steps: 1
+0.0200 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 12
+end_coords(cells): 1 -1 0 0 0 0 0 0
+intermediate_steps: 1
+0.0200 -0.0200 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 13
+end_coords(cells): 0 1 0 0 0 0 0 0
+intermediate_steps: 1
+0.0000 0.0200 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 14
+end_coords(cells): 0 -1 0 0 0 0 0 0
+intermediate_steps: 1 
+0.0000 -0.0200 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 15
+end_coords(cells): -1 -1 0 0 0 0 0 0
+intermediate_steps: 1
+-0.0200 -0.0200 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 16
+end_coords(cells): -1 0 0 0 0 0 0 0
+intermediate_steps: 1
+-0.0200 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 17
+end_coords(cells): -1 1 0 0 0 0 0 0
+intermediate_steps: 1
+-0.0200 0.0200 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 18
+end_coords(cells): 1 1 1 0 0 0 0 0
+intermediate_steps: 1
+0.0200 0.0200 0.0200 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 19
+end_coords(cells): 1 0 1 0 0 0 0 0
+intermediate_steps: 1
+0.0200 0.0000 0.0200 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 20
+end_coords(cells): 1 -1 1 0 0 0 0 0
+intermediate_steps: 1
+0.0200 -0.0200 0.0200 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 21
+end_coords(cells): 0 1 1 0 0 0 0 0
+intermediate_steps: 1
+0.0000 0.0200 0.0200 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 22
+end_coords(cells): 0 0 1 0 0 0 0 0
+intermediate_steps: 1
+0.0000 0.0000 0.0200 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 23
+end_coords(cells): 0 -1 1 0 0 0 0 0
+intermediate_steps: 1
+0.0000 -0.0200 0.0200 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 24
+end_coords(cells): -1 -1 1 0 0 0 0 0
+intermediate_steps: 1
+-0.0200 -0.0200 0.0200 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 25
+end_coords(cells): -1 0 1 0 0 0 0 0
+intermediate_steps: 1
+-0.0200 0.0000 0.0200 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 1
+id: 26
+end_coords(cells): -1 1 1 0 0 0 0 0
+intermediate_steps: 1
+-0.0200 0.0200 0.0200 0.0000 0.0000 0.0000 0.0000 0.0000
+
+type: long_distance
+group: 2
+id: 27
+end_coords(cells): 0 0 0 0 0 0 5 0
+intermediate_steps: 1
+0 0 0 0 0 0 0.174532925 0
+
+type: long_distance
+group: 2
+id: 28
+end_coords(cells): 0 0 0 0 0 0 -5 0
+intermediate_steps: 1
+0 0 0 0 0 0 -0.174532925 0
+
+type: long_distance
+group: 2
+id: 29
+end_coords(cells): 0 0 0 0 0 0 0 5
+intermediate_steps: 1
+0 0 0 0 0 0 0 0.174532925
+
+type: long_distance
+group: 2
+id: 30
+end_coords(cells): 0 0 0 0 0 0 0 -5
+intermediate_steps: 1
+0 0 0 0 0 0 0 -0.174532925
+
+type: long_distance
+group: 3
+id: 31
+end_coords(cells): 0 0 0 0 0 2 0 0
+intermediate_steps: 1
+0 0 0 0 0 0.196349541 0 0
+
+type: long_distance
+group: 3
+id: 32
+end_coords(cells): 0 0 0 0 0 -2 0 0
+intermediate_steps: 1
+0 0 0 0 0 0.196349541 0 0
+

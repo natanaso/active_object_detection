@@ -1,0 +1,10 @@
+<launch>
+<!--
+    <node pkg="amcl" type="amcl" name="amcl">
+        <param name="odom_frame_id" value="base_link"/>
+    </node>
+-->   
+    <node pkg="fake_localization" type="fake_localization" name="fake_localization">
+        <param name="odom_frame_id" value="odom_combined"/>
+    </node>
+</launch>

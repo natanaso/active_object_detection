@@ -1,0 +1,29 @@
+# start
+geometry_msgs/PoseStamped start
+
+# added for full body experiments without gazebo
+float64[] rarm_start
+float64[] larm_start
+float64[] body_start
+
+# goal
+geometry_msgs/PoseStamped goal
+
+# tolerance
+float64[] absolute_xyzrpy_tolerance
+
+# right arm position on the object (in the object frame)
+geometry_msgs/PoseStamped rarm_object
+
+# left arm position on the object (in the object frame)
+geometry_msgs/PoseStamped larm_object
+
+---
+
+# two arm trajectory
+trajectory_msgs/JointTrajectory trajectory
+trajectory_msgs/JointTrajectory body_trajectory
+
+# planning stats
+string[] stats_field_names
+float64[] stats

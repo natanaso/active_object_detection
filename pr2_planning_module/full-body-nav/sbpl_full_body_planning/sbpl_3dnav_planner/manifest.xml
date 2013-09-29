@@ -1,0 +1,54 @@
+<package>
+    <description brief="sbpl_3dnav_planner">
+
+        sbpl_3dnav_planner
+
+    </description>
+    <author>Benjamin Cohen/bcohen@seas.upenn.edu</author>
+    <license>BSD</license>
+    <review status="unreviewed" notes="" />
+    <url>http://www.ros.org/wiki/sbpl_3dnav_planner</url>
+
+    <!-- from sbpl_arm_planner -->
+    <depend package="sbpl" />
+    <depend package="angles" />
+    <depend package="kdl" />
+    <depend package="urdf" />
+    <depend package="pr2_arm_kinematics"/>
+    <depend package="kinematics_msgs"/>
+
+    <!-- from sbpl_arm_planner_node -->
+    <depend package="roscpp"/>
+    <depend package="rospy"/>
+    <!-- <depend package="bullet" /> -->
+    <depend package="tf" />
+    <depend package="arm_navigation_msgs" />
+    <depend package="visualization_msgs" />
+    <depend package="sensor_msgs" />
+    <depend package="message_filters" />
+    <depend package="geometric_shapes" />
+
+    <depend package="planning_environment" />
+    <depend package="planning_models" />
+    <!-- <depend package="sbpl_cartesian_arm_planner" /> -->
+    <depend package="sbpl_full_body_planner" />
+    <depend package="pr2_mechanism_msgs" /> <!-- for switching controllers -->
+
+    <!-- for aviz -->
+    <depend package="pr2_controllers_msgs"/>
+    <depend package="actionlib"/>
+    <depend package="geometry_msgs"/>
+    <depend package="kdl_parser" />
+
+    <depend package="pviz" />
+
+    <depend package="pluginlib"/>
+    <depend package="nav_core" />
+    <depend package="costmap_2d" />
+
+    <export>
+        <cpp cflags="-I${prefix}/include" lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib -lsbpl_3dnav_planner"/>
+        <nav_core plugin="${prefix}/bgp_plugin.xml" />
+    </export>
+
+</package>

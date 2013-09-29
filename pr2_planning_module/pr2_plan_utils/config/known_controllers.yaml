@@ -1,0 +1,28 @@
+# controllers that the pr2_python.ControllerManagerClient knows about
+
+# joint groups that each controller handles. used so that if we start a controller,
+# we can automatically stop all other controller which deal with the same joints
+controllers:
+    r_arm_controller:
+        groups: [r_arm]
+
+    l_arm_controller:
+        groups: [l_arm]
+
+    r_cart:
+        groups: [r_arm]
+
+    l_cart:
+        groups: [l_arm]
+
+    two_arm_controller:
+        groups: [r_arm, l_arm]
+
+# default controllers for each group. these are used, for example, if you are
+# using the two arm controller, and then switch to the r_arm controller. at that
+# point the two arm controller must be stopped, since it also controls the right
+# arm, but after that nothing will be controlling the left arm. the default controller
+# for the left arm will be started
+default_controllers:
+    r_arm: r_arm_controller
+    l_arm: l_arm_controller

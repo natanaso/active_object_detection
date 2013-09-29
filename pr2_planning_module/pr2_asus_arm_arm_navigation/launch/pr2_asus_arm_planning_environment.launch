@@ -1,0 +1,4 @@
+<launch>
+    <param name="robot_description" textfile="$(find gazebo_simulation)/Media/robots/pr2_asus_arm.xml" />
+    <rosparam command="load" ns="robot_description_planning" file="$(find pr2_asus_arm_arm_navigation)/config/pr2_asus_arm_planning_description.yaml" />
+</launch>

@@ -1,0 +1,21 @@
+<package>
+  <description brief="pr2_asus_arm_arm_navigation">
+
+     pr2_asus_arm_arm_navigation
+
+  </description>
+  <author>natanaso</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/pr2_asus_arm_arm_navigation</url>
+  <depend package="planning_environment"/>
+  <depend package="kinematics_base"/>
+  <depend package="arm_kinematics_constraint_aware"/>
+  <depend package="ompl_ros_interface"/>
+  <depend package="trajectory_filter_server"/>
+  <depend package="constraint_aware_spline_smoother"/>
+  <depend package="move_arm"/>
+
+</package>
+
+

@@ -1,0 +1,15 @@
+<launch>
+    <include file="$(find pr2_asus_arm_arm_navigation)/launch/pr2_asus_arm_planning_environment.launch" />
+    <node pkg="arm_kinematics_constraint_aware" type="arm_kinematics_constraint_aware" name="pr2_asus_arm_left_arm_kinematics">
+        <param name="group" type="string" value="left_arm" />
+        <param name="left_arm/root_name" type="string" value="torso_lift_link" />
+        <param name="left_arm/tip_name" type="string" value="l_wrist_roll_link" />
+        <param name="kinematics_solver" type="string" value="arm_kinematics_constraint_aware/KDLArmKinematicsPlugin" />
+    </node>
+    <node pkg="arm_kinematics_constraint_aware" type="arm_kinematics_constraint_aware" name="pr2_asus_arm_right_arm_kinematics">
+        <param name="group" type="string" value="right_arm" />
+        <param name="right_arm/root_name" type="string" value="torso_lift_link" />
+        <param name="right_arm/tip_name" type="string" value="r_wrist_roll_link" />
+        <param name="kinematics_solver" type="string" value="arm_kinematics_constraint_aware/KDLArmKinematicsPlugin" />
+    </node>
+</launch>

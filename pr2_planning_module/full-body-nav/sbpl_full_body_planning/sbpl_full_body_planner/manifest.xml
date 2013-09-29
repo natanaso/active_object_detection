@@ -1,0 +1,26 @@
+<package>
+  <description brief="sbpl_full_body_planner">
+
+     sbpl_full_body_planner
+
+  </description>
+  <author>Mike Phillips, Benjamin Cohen, Andrew Dornbush</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/sbpl_full_body_planner</url>
+
+  <depend package="sbpl_arm_planner" />
+  <depend package="roscpp" />
+  <depend package="geometric_shapes" />
+  <depend package="tf" />
+  <depend package="tf_conversions" />
+  <depend package="geometry_msgs" />
+  <depend package="pviz" />
+
+  <export>
+    <cpp cflags="-I${prefix}/include -O3 -g" lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib -lsbpl_full_body_planner"/>
+  </export>
+
+</package>
+
+

@@ -1,0 +1,23 @@
+<launch>
+  
+  <include file="$(find pr2_machine)/$(env ROBOT).machine" />
+  <node pkg="topic_tools" type="throttle" name="throttle_joint_states" args="messages joint_states 1.0" />
+  
+  <!-- Kinematics -->
+  <include file="$(find pr2_arm_navigation_kinematics)/launch/pr2_ik_rarm_node.launch"/>
+  <include file="$(find pr2_arm_navigation_kinematics)/launch/pr2_ik_larm_node.launch"/>
+
+   <!-- Map Server, Localization -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find sbpl_two_arm_planner_node)/maps/blank.pgm 0.020" />
+  <include file="$(find pr2_navigation_global)/amcl_node.xml" />
+
+  <node launch-prefix="gdb -ex run --args" pkg="sbpl_two_arm_planner_node" type="testDualCollisionSpace" name="test_collision_space" output="screen" respawn="false" >
+  <!--<node pkg="sbpl_two_arm_planner_node" type="testDualCollisionSpace" name="test_collision_space" output="screen" respawn="false" > -->
+    <rosparam command="load" file="$(find sbpl_two_arm_planner)/config/pr2_both_arms.yaml" /> 
+    <rosparam command="load" file="$(find sbpl_two_arm_planner)/config/pr2_body.yaml" />
+    <param name="planner/left_arm_description_file" value="$(find sbpl_arm_planner)/config/pr2_left_arm.cfg" />
+    <param name="planner/right_arm_description_file" value="$(find sbpl_arm_planner)/config/pr2_right_arm.cfg" />
+    <remap from="joint_states" to="joint_states_throttle" />
+  </node>
+
+</launch>
