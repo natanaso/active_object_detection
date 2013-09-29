@@ -1,0 +1,11 @@
+<launch>
+
+  <rosparam command="load" file="$(find first_pr2_exp)/config/pr2_two_arm_controller.yaml" />
+
+
+  <!-- Controllers that come up started -->
+  <node name="two_arm_controllers_spawner"
+        pkg="pr2_controller_manager" type="spawner" output="screen"
+        args="--wait-for=calibrated --stopped two_arm_controller" />
+  
+</launch>

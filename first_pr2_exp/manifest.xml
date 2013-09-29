@@ -1,0 +1,18 @@
+<package>
+  <description brief="first_pr2_exp">
+
+     first_pr2_exp
+
+  </description>
+  <author>Nikolay Atanasov</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/first_pr2_exp</url>
+  <depend package="roscpp"/>
+  <depend package="actionlib"/>
+  <depend package="pr2_controllers_msgs"/>
+  <depend package="pr2_tuckarm"/>
+  <depend package="pr2_plan_utils"/>
+</package>
+
+

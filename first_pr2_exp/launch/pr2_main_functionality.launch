@@ -1,0 +1,30 @@
+<launch>
+	<!-- pr2-table-experiment-gt -->
+	<!-- colortable-sim -->
+	<arg name="map_suffix" default="grasp-lab"/>	
+	
+	<include file="$(find pr2_machine)/$(env ROBOT).machine" />
+
+	<!-- Start the localization -->
+	<include file="$(find first_pr2_exp)/launch/pr2_localization.launch">
+		<arg name="map_suffix" value="$(arg map_suffix)"/>
+	</include>
+
+	<!-- Start the perception -->
+	<include file="$(find first_pr2_exp)/launch/pr2_perception.launch">
+		<arg name="stereo" value="true"/>
+	  	<arg name="use_right_arm" value="true" />
+	  	<arg name="use_left_arm" value="true" />
+		<arg name="use_camera_in_collider" value="false" />
+		<arg name="kinect_frame_prefix" value="/openni" />
+	</include>
+	
+
+	<!-- Start planning -->
+	<include file="$(find first_pr2_exp)/launch/pr2_planning.launch">
+		<arg name="map_suffix" value="$(arg map_suffix)"/>
+  		<arg name="use_right_arm" value="true" />
+  		<arg name="use_left_arm" value="true" />
+	</include>
+
+</launch>

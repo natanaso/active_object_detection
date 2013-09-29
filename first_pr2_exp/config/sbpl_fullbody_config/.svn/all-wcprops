@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/ns_shared/!svn/ver/405/penn_nbv_slam/gazebo_simulation/config/sbpl_fullbody_config
+END
+pr2_both_arms_thomas.yaml
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/ns_shared/!svn/ver/388/penn_nbv_slam/gazebo_simulation/config/sbpl_fullbody_config/pr2_both_arms_thomas.yaml
+END
+pr2_both_arms_pr2-table-experiment-gt.yaml
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/ns_shared/!svn/ver/405/penn_nbv_slam/gazebo_simulation/config/sbpl_fullbody_config/pr2_both_arms_pr2-table-experiment-gt.yaml
+END
+pr2_body.yaml
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/ns_shared/!svn/ver/400/penn_nbv_slam/gazebo_simulation/config/sbpl_fullbody_config/pr2_body.yaml
+END
+pr2_both_arms_upenn-simulation.yaml
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/ns_shared/!svn/ver/388/penn_nbv_slam/gazebo_simulation/config/sbpl_fullbody_config/pr2_both_arms_upenn-simulation.yaml
+END
