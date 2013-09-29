@@ -1,0 +1,26 @@
+<package>
+  <description brief="virtual_kinect_pkg">
+
+     virtual_kinect_pkg
+
+  </description>
+  <author>natanaso</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/virtual_kinect_pkg</url>
+  <depend package="roscpp"/>
+  <depend package="rospy"/>
+  <depend package="actionlib"/>
+  <depend package="actionlib_msgs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="pcl_ros"/>
+  <depend package="pcl"/>
+  <depend package="util_pkg"/>
+  <rosdep name="boost"/>
+
+  <export>
+    <cpp cflags="-I${prefix}/include" lflags="-L${prefix}/lib -Wl,-rpath,${prefix}/lib -lvkin" />    
+  </export>  
+</package>
+
+

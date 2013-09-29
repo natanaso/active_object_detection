@@ -1,0 +1,20 @@
+<launch>
+	
+	<!-- Start a virtual kinect at the test scene -->
+	<node name="vkin_serv1" pkg="virtual_kinect_pkg" type="test_vkin_server"
+			args="" respawn="false" output="screen">		 
+		<param  name="ply_file_path" type="string"
+				  value="$(find virtual_kinect_pkg)/../database/test_scenes/test_scene1.ply"/>
+		
+		<!-- Specify the kinect initial position -->
+		<!-- The orientation is set to look at (0,0,0) -->
+		<param name="px" type="double" value="1.5"/>
+		<param name="py" type="double" value="-1.5"/>
+		<param name="pz" type="double" value="0.0"/>
+		
+	</node>
+
+</launch>
+
+<!-- To visualize run: -->
+<!-- rosrun rviz rviz -d `rospack find virtual_kinect_pkg`/cfg/test_virtual_kinect.vcg -->
