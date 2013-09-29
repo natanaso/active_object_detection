@@ -1,0 +1,22 @@
+<package>
+  <description brief="util_pkg">
+
+     util_pkg
+
+  </description>
+  <author>natanaso</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/util_pkg</url>
+  <depend package="ann2"/>
+  <depend package="pcl_ros"/>
+  <rosdep name="boost"/>
+  
+  <export>
+    <cpp cflags="`pkg-config --cflags eigen3` `rosboost-cfg --cflags` -I${prefix}/include" 
+    	 lflags="-L${prefix}/lib -Wl,-rpath,${prefix}/lib -lmisc_utils -lood_vis" />
+  </export>
+  
+</package>
+
+
