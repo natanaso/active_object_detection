@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+echo "Bash version ${BASH_VERSION}..."
+
+declare -a TRAIN_COUNT=(3)
+tidx=0
+
+for (( tcnt=1; tcnt <= ${TRAIN_COUNT[$tidx]}; tcnt++ )); do
+	echo $tcnt
+done
+
+
+
+
+
+for i in {0..10..2}
+  do
+     echo "Welcome $i times"
+done

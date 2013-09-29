@@ -1,0 +1,24 @@
+<package>
+  <description brief="active_vision_pkg">
+
+     active_vision_pkg
+
+  </description>
+  <author>natanaso</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/active_vision_pkg</url>
+  <depend package="roscpp"/>
+<!--  <depend package="rospy"/>-->
+  <depend package="roslib"/>
+  <depend package="util_pkg"/>
+  <depend package="planning_module"/>
+  <depend package="vision_module"/>
+  <depend package="vocabulary_tree"/>
+  <depend package="virtual_kinect_pkg"/>
+  <rosdep name="boost"/>
+  
+  
+</package>
+
+
