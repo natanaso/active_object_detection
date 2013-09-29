@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+#
+# To run in parallel gnu parallel is necessary which can be obtained as follows:
+# 	wget http://git.savannah.gnu.org/cgit/parallel.git/plain/src/parallel
+#	chmod 755 parallel
+#	sudo ln -s ./parallel /usr/local/bin/parallel
+#
+# @author
+#	Nikolay Atanasov
+#	Grasp Lab
+#	University of Pennsylvania
+#	Philadelphia, PA 19104
+#	10/26/2012
+#
+
+
+# object names:
+#declare -a TRAIN_EXAMPLES=(axe bigbox broom brush flowerspray gastank handlebottle heavyranch pan pipe shovel spadefork spraybottle watercan wreckbar apples bathroomkit bottles cups glasses vases)
+
+declare -a TRAIN_EXAMPLES=(spadefork watercan wreckbar apples bathroomkit bottles cups glasses vases)
+
+vps_fname=$(rospack find vision_module)/data/omap_vps.txt
+
+PLY_FILE_DIR=$(rospack find vision_module)/../database/models
+OMAP_SAVE_DIR=$(rospack find vision_module)/data/omap/occ1
+BUILD_OMAP=$(rospack find vision_module)/bin/build_omap_occ
+
+
+# read every number
+#vps=( $(<"$vps_fname") )
+
+# read line by line
+idx=0
+while read line; do
+  vps[$idx]=$line
+  idx=$((idx+1))
+done < "$vps_fname"
+
+# call parallel for the train examples
+(
+for tidx in "${!TRAIN_EXAMPLES[@]}"; do
+	for vidx in "${!vps[@]}"; do
+		echo "${BUILD_OMAP} ${PLY_FILE_DIR}/${TRAIN_EXAMPLES[$tidx]}.ply $tidx ${OMAP_SAVE_DIR} ${vps[$vidx]} $vidx";
+	done
+done
+) | parallel
+
+# combine the files into only one
+for tidx in "${!TRAIN_EXAMPLES[@]}"; do
+	for vidx in "${!vps[@]}"; do
+		cat ${OMAP_SAVE_DIR}/oMap_${tidx}_${vidx}.txt >> ${OMAP_SAVE_DIR}/oMap_${TRAIN_EXAMPLES[$tidx]}.txt
+		rm ${OMAP_SAVE_DIR}/oMap_${tidx}_${vidx}.txt
+	done
+done
+
+
+# ${BUILD_OMAP} ${PLY_FILE_DIR}/handlebottle.ply 1 ${OMAP_SAVE_DIR}
+
+# call parallel for the positive examples
+#(
+#for value in "${POSITIVE_EXAMPLES[@]}"; do
+#	for idx in "${!vps[@]}"; do
+#		echo "${BUILD_OMAP} ${PLY_FILE_DIR}/${value} 1 ${OMAP_SAVE_DIR} ${vps[$idx]} $idx";
+#	done
+#done
+#) | parallel
+
+## combine the files into only one
+#for idx in "${!vps[@]}"; do
+#	cat ${OMAP_SAVE_DIR}/oMap_1_$idx.txt >> ${OMAP_SAVE_DIR}/oMap_1.txt
+#	rm ${OMAP_SAVE_DIR}/oMap_1_$idx.txt
+#done
+

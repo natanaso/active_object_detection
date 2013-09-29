@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#
+# To run in parallel gnu parallel is necessary which can be obtained as follows:
+# 	wget http://git.savannah.gnu.org/cgit/parallel.git/plain/src/parallel
+#	chmod 755 parallel
+#	sudo ln -s ./parallel /usr/local/bin/parallel
+#
+# @author
+#	Nikolay Atanasov
+#	Grasp Lab
+#	University of Pennsylvania
+#	Philadelphia, PA 19104
+#	10/26/2012
+#
+
+
+# object names:
+declare -a ONAMES=(axe bigbox broom brush flowerspray gastank handlebottle heavyranch pan pipe shovel spadefork spraybottle watercan wreckbar apples bathroomkit bottles cups glasses vases)
+
+VPM=$(rospack find vision_module)/bin/vpm
+
+# call parallel
+(
+for oidx in "${!ONAMES[@]}"; do
+	echo "$VPM ${ONAMES[$oidx]}";
+done
+) | parallel

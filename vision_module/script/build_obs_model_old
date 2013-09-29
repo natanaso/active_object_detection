@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+#
+# To run in parallel gnu parallel is necessary which can be obtained as follows:
+# 	wget http://git.savannah.gnu.org/cgit/parallel.git/plain/src/parallel
+#	chmod 755 parallel
+#	sudo ln -s ./paralel /usr/local/bin/parallel
+#
+# @author
+#	Nikolay Atanasov
+#	Grasp Lab
+#	University of Pennsylvania
+#	Philadelphia, PA 19104
+#	10/26/2012
+#
+
+
+PLY_FILE_DIR=/media/natanaso/Data/Stuff/Research/OptimalObjectDetection/ObjectDatasets/UPenn/train_objs/positive_examples
+
+OMAP_SAVE_DIR=$(rospack find vision_module)/data/omap
+
+declare -a POSITIVE_EXAMPLES=(handlebottle_yaw0.ply)
+
+#declare -a POSITIVE_EXAMPLES=(handlebottle_yaw0.ply handlebottle_yaw60.ply handlebottle_yaw120.ply handlebottle_yaw180.ply handlebottle_yaw240.ply handlebottle_yaw300.ply)
+
+declare -a NEGATIVE_EXAMPLES=(
+bigbox_yaw0.ply          bigbox_yaw120.ply        bigbox_yaw180.ply        bigbox_yaw240.ply
+bigbox_yaw300.ply        bigbox_yaw60.ply        broom_yaw0.ply           broom_yaw120.ply         broom_yaw180.ply
+broom_yaw240.ply         broom_yaw300.ply        broom_yaw60.ply          brush_yaw0.ply           brush_yaw120.ply
+brush_yaw180.ply         brush_yaw240.ply        brush_yaw300.ply         brush_yaw60.ply          flowerspray_yaw0.ply
+flowerspray_yaw120.ply   flowerspray_yaw180.ply  flowerspray_yaw240.ply   flowerspray_yaw300.ply   flowerspray_yaw60.ply
+gastank_yaw0.ply         gastank_yaw120.ply      gastank_yaw180.ply       gastank_yaw240.ply       gastank_yaw300.ply
+gastank_yaw60.ply        handlebottle_yaw0.ply   handlebottle_yaw120.ply  handlebottle_yaw180.ply  handlebottle_yaw240.ply
+handlebottle_yaw300.ply  handlebottle_yaw60.ply  heavyranch_yaw0.ply      heavyranch_yaw120.ply    heavyranch_yaw180.ply
+heavyranch_yaw240.ply    heavyranch_yaw300.ply   heavyranch_yaw60.ply     pan_yaw0.ply             pan_yaw120.ply
+pan_yaw180.ply           pan_yaw240.ply          pan_yaw300.ply           pan_yaw60.ply            pipe_yaw0.ply
+pipe_yaw120.ply          pipe_yaw180.ply         pipe_yaw240.ply          pipe_yaw300.ply          pipe_yaw60.ply
+shovel_yaw0.ply          shovel_yaw120.ply       shovel_yaw180.ply        shovel_yaw240.ply        shovel_yaw300.ply
+shovel_yaw60.ply         spadefork_yaw0.ply      spadefork_yaw120.ply     spadefork_yaw180.ply     spadefork_yaw240.ply
+spadefork_yaw300.ply     spadefork_yaw60.ply     spraybottle_yaw0.ply     spraybottle_yaw120.ply   spraybottle_yaw180.ply
+spraybottle_yaw240.ply   spraybottle_yaw300.ply  spraybottle_yaw60.ply    watercan_yaw0.ply        watercan_yaw120.ply
+watercan_yaw180.ply      watercan_yaw240.ply     watercan_yaw300.ply      watercan_yaw60.ply       wreckbar_yaw0.ply
+wreckbar_yaw120.ply      wreckbar_yaw180.ply     wreckbar_yaw240.ply      wreckbar_yaw300.ply      wreckbar_yaw60.ply)
+
+BUILD_OMAP=$(rospack find vision_module)/bin/build_omap
+
+#hyp=3
+#${BUILD_OMAP} ${PLY_FILE_DIR}/${value} $hyp ${OMAP_SAVE_DIR}
+
+(for value in "${POSITIVE_EXAMPLES[@]}"; do
+
+	case ${value//[!0-9]} in
+	0)
+	    hyp=1;;
+	60)
+	    hyp=2;;
+	120)
+	    hyp=3;;
+	180)
+	    hyp=4;;
+	240)
+	    hyp=5;;
+	300)
+		hyp=6;;
+	esac
+
+	echo "${BUILD_OMAP} ${PLY_FILE_DIR}/${value} $hyp ${OMAP_SAVE_DIR}";
+
+done) | parallel
+
+#parallel ${BUILD_OMAP} ${PLY_FILE_DIR}/{} 0 ${OMAP_SAVE_DIR} ::: ${NEGATIVE_EXAMPLES[@]}

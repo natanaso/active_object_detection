@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+#
+# To run in parallel gnu parallel is necessary which can be obtained as follows:
+# 	wget http://git.savannah.gnu.org/cgit/parallel.git/plain/src/parallel
+#	chmod 755 parallel
+#	sudo ln -s ./parallel /usr/local/bin/parallel
+#
+# @author
+#	Nikolay Atanasov
+#	Grasp Lab
+#	University of Pennsylvania
+#	Philadelphia, PA 19104
+#	10/26/2012
+#
+
+
+# object names:
+declare -a ONAMES=(axe bigbox broom brush flowerspray gastank handlebottle heavyranch pan pipe shovel spadefork spraybottle watercan wreckbar apples bathroomkit bottles cups glasses vases)
+
+DATABASE_DIR=$(rospack find vision_module)/../database
+
+for oidx in "${!ONAMES[@]}"; do
+	mv $DATABASE_DIR/cloud_data/${ONAMES[$oidx]}_views/${ONAMES[$oidx]}_complete.pcd $DATABASE_DIR/pcd_models/${ONAMES[$oidx]}_complete.pcd
+done

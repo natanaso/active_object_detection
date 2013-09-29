@@ -1,0 +1,30 @@
+OFFLINE PHASE:
+1. Specify the names of the training objects in ./script/extract_tree_train_pcd
+
+2. Make sure the view points in ./data/tree_vps.txt are correct
+
+-----------------------------------------------------------------------------------------------
+
+3. Run ./script/extract_tree_train_pcd which will create the pcd files in ../database/cloud_data
+
+4. Backup the old tree weights from ./data
+
+5. roslaunch vision_module build_tree_database.launch
+
+6. Specify the names of the objects for the observation model in ./script/build_obs_model
+
+7. Make sure the view points in ./data/omap_vps.txt are correct
+
+8. Run ./script/build_obs_model which will get the top scores for each viewpoint and save them in ./data/omap/oMap_objectname.txt
+
+9. Use a matlab script to produce the final oMap
+
+
+
+TODO:
+	- Seems like we should not subsample and use the fpfh!!
+	- pfh vs fpfh vs less keypoints vs subsample
+	- voxelgrid: distorts cloud and complains "Euclidean distance between points is 0!" during feature calculation
+	- randomsample: seems to remove too many points but might still work but our clounds are/should not be too big! We are concerned with accuracy!!
+	- record distance with scores instead of 1-100 
+	- setup a test framework for a single object to test active vs passive vision

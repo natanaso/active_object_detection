@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+#
+# To run in parallel gnu parallel is necessary which can be obtained as follows:
+# 	wget http://git.savannah.gnu.org/cgit/parallel.git/plain/src/parallel
+#	chmod 755 parallel
+#	sudo ln -s ./parallel /usr/local/bin/parallel
+#
+# @author
+#	Nikolay Atanasov
+#	Grasp Lab
+#	University of Pennsylvania
+#	Philadelphia, PA 19104
+#	10/26/2012
+#
+
+# clutter objects: apples, bathroomkit, bottles, cups, glasses, vases
+declare -a OBJ_NAME_ARRAY=(axe bigbox broom brush flowerspray gastank handlebottle heavyranch pan pipe shovel spadefork spraybottle watercan wreckbar apples bathroomkit bottles cups glasses vases)
+
+
+PLY_FILE_DIR=$(rospack find vision_module)/../database/models
+PCD_SAVE_DIR=$(rospack find vision_module)/../database/cloud_data
+#PCD_SAVE_DIR=$(rospack find vision_module)/../database/cloud_data_plan_vps
+#PCD_SAVE_DIR=$(rospack find vision_module)/../database/cloud_data_omap_vps
+PLY2TRAINPCD=$(rospack find vision_module)/bin/ply2traindata
+
+
+## Sequential
+#for obj_idx in ${OBJ_NAME_ARRAY[@]}
+#do
+#	mkdir ${PCD_SAVE_DIR}/${obj_idx}_views
+#	echo ${PLY2TRAINPCD} ${PLY_FILE_DIR}/${obj_idx}_yaw0.ply ${PCD_SAVE_DIR}/${obj_idx}_views
+#	${PLY2TRAINPCD} ${PLY_FILE_DIR}/${obj_idx}_yaw0.ply ${PCD_SAVE_DIR}/${obj_idx}_views
+#done
+
+
+# Parallel
+parallel mkdir ${PCD_SAVE_DIR}/{}_views ::: ${OBJ_NAME_ARRAY[@]}
+parallel ${PLY2TRAINPCD} ${PLY_FILE_DIR}/{}.ply ${PCD_SAVE_DIR}/{}_views ::: ${OBJ_NAME_ARRAY[@]}
+

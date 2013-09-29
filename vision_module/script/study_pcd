@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+#
+#
+# @author
+#	Nikolay Atanasov
+#	Grasp Lab
+#	University of Pennsylvania
+#	Philadelphia, PA 19104
+#	10/30/2012
+#
+
+
+# counter starts at 0
+VP=0
+
+PCD_FROM_PLY=$(rospack find vision_module)/bin/pcd_from_ply
+PLY_FILE=$(rospack find vision_module)/../database/models/axe.ply
+PCD_FILE=$(rospack find vision_module)/data/axe_pcd1.pcd
+SCR_FILE=$(rospack find vision_module)/data/axe_scores1.txt
+
+# read viewpoints file
+vps_fname=$(rospack find vision_module)/data/omap_vps.txt
+#vps_fname=$(rospack find vision_module)/data/tree_vps.txt
+#vps_fname=$(rospack find active_vision_pkg)/data/plan_vps.txt
+vps=( $(<"$vps_fname") )
+
+VPX=${vps[3 * $VP]}
+VPY=${vps[3 * $VP+1]}
+VPZ=${vps[3 * $VP+2]}
+
+TPX=0
+TPY=0
+TPZ=0
+
+
+COORD=1	# COORD = 0 (object coord), 1 (camera optical), 2 (camera standard)
+ADD_NOISE=1
+
+ASCII=1				# save in ascii
+SUBSAMPLE=0 		#0.001	# leaf size of voxel grid filter
+
+
+$PCD_FROM_PLY -coord $COORD -add_noise $ADD_NOISE -vp $VPX,$VPY,$VPZ -tp $TPX,$TPY,$TPZ -save_scores $SCR_FILE -ascii $ASCII -subsamp $SUBSAMPLE $PLY_FILE $PCD_FILE
+

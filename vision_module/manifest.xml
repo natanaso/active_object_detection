@@ -1,0 +1,36 @@
+<package>
+  <description brief="vision_module">
+
+     vision_module
+
+  </description>
+  <author>Bharath Sankaran</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/vision_module</url>
+  <depend package="roscpp"/>
+  <depend package="roslib"/> 
+  
+  <!-- <depend package="rospy"/> --> 
+  <!-- <depend package="rospack"/> -->
+  <!-- <depend package="actionlib"/> -->
+  <!-- <depend package="actionlib_msgs"/> -->
+  <!-- <depend package="std_msgs"/> -->
+  <!-- <depend package="geometry_msgs"/> -->
+  <!-- <depend package="pcl_ros"/> -->
+  <!-- <depend package="pcl"/> -->
+  
+  <depend package="pcl16"/>
+  <depend package="ann2"/>
+  <depend package="vocabulary_tree"/>
+  <depend package="virtual_kinect_pkg"/>
+  <depend package="util_pkg"/>
+  <rosdep name="boost"/>
+
+  <export>
+    <cpp cflags="-I${prefix}/include" lflags="-L${prefix}/lib -Wl,-rpath,${prefix}/lib -lvtree_user" />
+  </export>
+
+</package>
+
+

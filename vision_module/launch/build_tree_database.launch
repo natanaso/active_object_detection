@@ -1,0 +1,14 @@
+<launch>
+<node  pkg="vision_module" type="build_tree" name="build_tree" output="screen">
+	<param  name="command" type="string" value="/init" />
+	<param  name="tree_k" type="int" value="16" />
+	<param  name="tree_levels" type="int" value="5" />
+
+	<!-- path to folder with training pcd files -->
+	<param  name="clouds_dir" type="string" value="$(find vision_module)/../data/cloud_data/" />
+
+	<!-- path to directory where the database will be saved -->
+	<param  name="database_dir" type="string" value="$(find vision_module)/data/" /> 
+</node>
+</launch>
+
