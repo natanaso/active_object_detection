@@ -1,0 +1,25 @@
+<?xml version ='1.0'?>
+<gazebo version="1.0">
+	<model name="handlebottle_on_table" static="true">
+		<link name="body">
+			<inertial mass="10.0">
+				<inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+			</inertial>
+
+			<collision name="coll_bt">
+				<origin pose="0 0 0.0 0 0 0"/>
+				<geometry>
+					<mesh filename="table_meshes/table_3x3_0_0_1.5615.dae" />
+				</geometry>
+			</collision>
+
+			<visual name="visual_bt">
+				<origin pose="0 0 0.0 0 0 0"/>
+				<geometry>
+					<mesh filename="table_meshes/table_3x3_0_0_1.5615.dae" />
+				</geometry>
+				<material script="Gazebo/Wood"/>
+			</visual>
+		</link>
+	</model>
+</gazebo>

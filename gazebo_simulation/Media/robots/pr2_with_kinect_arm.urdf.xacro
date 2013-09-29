@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+       xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       xmlns:xacro="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       name="pr2_r_arm_kinect" >
+  
+  <!-- PR2 -->
+  <include filename="$(find pr2_description)/robots/pr2.urdf.xacro" />
+
+  <!-- kinect model -->
+  <include filename="$(find pr2_description)/urdf/sensors/kinect_camera.urdf.xacro" />
+
+  <!-- Kinect Camera r_gripper_palm_link-->
+  <xacro:kinect_camera_v0 name="arm_kinect" parent="r_gripper_palm_link" >
+    <!--
+    <origin xyz="0.100244 0.0262261 0.0591213" rpy="-0.000450587077979611 -0.0458763221443225 0.00846699082407587" />
+    -->
+    <origin xyz="0.0713 0.0 0.0744" rpy="0 0 0" />  
+  </xacro:kinect_camera_v0>  
+</robot>

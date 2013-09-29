@@ -1,0 +1,27 @@
+<gazebo version="1.0">
+  <model name="plane1_model" static="true">
+    <link name="body">
+      <collision name="geom">
+        <geometry>
+          <plane normal="0 0 1"/>
+        </geometry>
+        <surface>
+          <friction>
+            <ode mu="100" mu2="50"/>
+          </friction>
+			 <bounce restitution_coefficient="0" threshold="1000000.0"/>
+			 <contact>
+			   <ode soft_cfm="0" soft_erp="0.2" kp="1e10" kd="1" max_vel="100.0" min_depth="0.0001"/>
+			 </contact>
+        </surface>
+      </collision>
+
+      <visual name="visual" cast_shadows="false">
+        <geometry>
+          <plane normal="0 0 1"/>
+        </geometry>
+        <material script="Gazebo/Grey"/>
+      </visual>
+    </link>
+  </model>
+</gazebo>

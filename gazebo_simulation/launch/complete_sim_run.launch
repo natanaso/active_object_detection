@@ -1,0 +1,14 @@
+<launch>
+
+	<!-- run gotopose_main -->
+	<node pkg="gazebo_simulation" name="go_to_pose_act" type="gotopose_main.py"
+			respawn="false" output="screen"/>
+
+	<!-- run go to pose main -->
+	<node pkg="gazebo_simulation" name="pr2_client1" type="pr2_client"
+			respawn="false" output="screen"/>
+
+	<!-- run the pr2_client visualization -->
+	<node pkg="rviz" name="rviz" type="rviz" args="-d $(find gazebo_simulation)/rviz_cfg/pr2_client.vcg" />
+
+</launch>

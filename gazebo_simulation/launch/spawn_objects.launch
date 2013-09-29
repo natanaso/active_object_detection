@@ -1,0 +1,44 @@
+<launch>
+
+	<!-- spawn wall 1 -->
+	<node name="spawn_wall_1" pkg="gazebo" type="spawn_model" args="-gazebo -file $(find gazebo_simulation)/Media/walls/simple_wall_10.model -model wall1 -x 0 -y -5 -Y 0" respawn="false" output="screen" />
+
+	<!-- spawn wall 2 -->
+	<node name="spawn_wall_2" pkg="gazebo" type="spawn_model" args="-gazebo -file $(find gazebo_simulation)/Media/walls/simple_wall_10.model -model wall2 -x 0 -y 10 -Y 0" respawn="false" output="screen" />
+
+	<!-- spawn wall 3 -->
+	<node name="spawn_wall_3" pkg="gazebo" type="spawn_model" args="-gazebo -file $(find gazebo_simulation)/Media/walls/simple_wall_15.model -model wall3 -x -5 -y 2.5 -Y 1.57079632679" respawn="false" output="screen" />
+
+	<!-- spawn wall 4 -->
+	<node name="spawn_wall_4" pkg="gazebo" type="spawn_model" args="-gazebo -file $(find gazebo_simulation)/Media/walls/simple_wall_15.model -model wall4 -x 5 -y 2.5 -Y 1.57079632679" respawn="false" output="screen" />
+
+	<!-- spawn wall 5 -->
+	<node name="spawn_wall_5" pkg="gazebo" type="spawn_model" args="-gazebo -file $(find gazebo_simulation)/Media/walls/simple_wall_6.model -model wall5 -x -2 -y 5 -Y 0" respawn="false" output="screen" />
+
+	<!-- spawn wall 6 -->
+	<node name="spawn_wall_6" pkg="gazebo" type="spawn_model" args="-gazebo -file $(find gazebo_simulation)/Media/walls/simple_wall_3.model -model wall6 -x 3.5 -y 5 -Y 0" respawn="false" output="screen" />
+	
+	<!-- spawn a (LxWxH = 2.0 x 1.0 x 0.55) table at (x,y,z) = (0.98,0.0) with tabletop thickness = 0.05 and height 0.585 -->
+	<param name="table_description" 
+			 command="$(find xacro)/xacro.py '$(find gazebo_simulation)/Media/tables/table.urdf.xacro'" />
+	<node name="spawn_table" pkg="gazebo" type="spawn_model" args="-urdf -param table_description -model table_1" 
+   		respawn="false" output="screen" />
+
+  <!-- spawn tabletop objects -->
+	<node name="spawn_cola_cup" pkg="gazebo" type="spawn_model" args="-urdf -file $(find gazebo_simulation)/Media/tabletop_objects/cola_cup.urdf -wait table_1 -model cola_cup -x 1.0 -y -0.10 -z 0.55" respawn="false" output="screen" />
+	<node name="spawn_cokecan" pkg="gazebo" type="spawn_model" args="-urdf -file $(find gazebo_simulation)/Media/tabletop_objects/cokecan.urdf -wait table_1 -model cokecan -x 1.0 -z 0.55" respawn="false" output="screen" />
+	<node name="spawn_flowerspray" pkg="gazebo" type="spawn_model" args="-urdf -file $(find gazebo_simulation)/Media/tabletop_objects/flowerspray.urdf -wait table_1 -model flowerspray -x 1.3 -y -0.35 -z 0.55" respawn="false" output="screen" />
+	<node name="spawn_handlebottle" pkg="gazebo" type="spawn_model" args="-urdf -file $(find gazebo_simulation)/Media/tabletop_objects/handlebottle.urdf -wait table_1 -model handlebottle -x 1.3 -y 0.25 -z 0.55" respawn="false" output="screen" />
+	<node name="spawn_pan" pkg="gazebo" type="spawn_model" args="-urdf -file $(find gazebo_simulation)/Media/tabletop_objects/pan.urdf -wait table_1 -model pan -x 1.4 -z 0.55" respawn="false" output="screen" />
+	
+	<!-- 
+	<node name="spawn_tabletop" pkg="gazebo" type="spawn_model" args="-urdf -file $(find gazebo_simulation)/Media/tabletops/color_testscene_grasp.urdf -wait table_1 -model color_testscene_grasp -x 1.0 -y 0.0 -z 0.55 -Y 1.57079632679" respawn="false" output="screen" />
+	-->
+	
+	<!-- parameters that give you reasonable physics as well as good speed -->
+	<!-- needed so that gripper joint stops on objects instead of oscillating forever -->
+	<node name="sor_pgs_iters" pkg="dynamic_reconfigure" type="dynparam" args="set gazebo sor_pgs_iters 50"/>
+	<node name="sor_pgs_w" pkg="dynamic_reconfigure" type="dynparam" args="set gazebo sor_pgs_w 1.0"/>
+	<node name="time_step" pkg="dynamic_reconfigure" type="dynparam" args="set gazebo time_step 0.001"/>
+	
+</launch>

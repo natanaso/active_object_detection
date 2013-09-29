@@ -1,0 +1,59 @@
+<launch>
+	<!-- Start the smart sensor -->
+	<node name="ss_arbiter1" pkg="active_vision_pkg" 
+			type="ss_arbiter" args="" respawn="false" output="screen">
+			<!--launch-prefix="gnome-terminal -e gdb"> -->
+		<param  name="obj_list_path" type="string" 
+				  value="$(find active_vision_pkg)/data/obj_list.txt"/>
+		<param  name="neg_obj_list_path" type="string" 
+				  value="$(find active_vision_pkg)/data/neg_obj_list.txt"/>
+		<param  name="hyp_path" type="string"
+				  value="$(find active_vision_pkg)/data/hypotheses.txt"/>
+		<param  name="tree_vps_path" type="string" 
+				  value="$(find vision_module)/data/tree_vps.txt"/>
+		<param  name="omap_vps_path" type="string" 
+				  value="$(find vision_module)/data/omap_vps.txt"/>	
+		<param  name="plan_vps_path" type="string"
+				  value="$(find active_vision_pkg)/data/plan_vps.txt"/>			  
+		<param  name="policy_dir_path" type="string" 
+				  value="$(find active_vision_pkg)/data/sarsop_data"/>
+		<param  name="omap_file_path" type="string" 
+				  value="$(find active_vision_pkg)/data/sarsop_data/oMap.txt"/>
+		<param  name="cmap_file_path" type="string" 
+				  value="$(find active_vision_pkg)/data/sarsop_data/cMap.txt"/>				  
+		<param  name="database_dir" type="string" 
+				  value="$(find vision_module)/data"/>
+		<param  name="clouds_dir" type="string" 
+				  value="$(find vision_module)/../database/cloud_data"/>
+
+		<!-- tabletop analyzer parameters -->
+		<param name="table_detection_voxel_size" type="double" value="0.005"/>
+		<param name="object_detection_voxel_size" type="double" value="0.0005"/>
+		<param name="z_filter_min" type="double" value="0.5"/>
+		<param name="z_filter_max" type="double" value="2.65"/>
+		<param name="table_z_filter_min" type="double" value="0.009"/>
+		<param name="table_z_filter_max" type="double" value="1.0"/>
+		<param name="object_cluster_distance" type="double" value="0.01"/>
+
+
+		<!-- sensor connection parameters 
+		<param name="cld_topic_name" type="string" value="/arm_kinect/arm_kinect/depth/points"/>
+		<param name="fx_frm" type="string" value="/map"/>
+		<param name="snsr_frm" type="string" value="/arm_kinect_frame"/>
+		<param name="opt_frm" type="string" value="/arm_kinect_optical_frame"/>
+		-->
+		<param name="cld_topic_name" type="string" value="/arm_kinect/depth/points"/>
+		<param name="fx_frm" type="string" value="/map"/>
+		<!-- <param name="snsr_frm" type="string" value="/arm_kinect_depth_sensor_frame"/> -->
+		<param name="opt_frm" type="string" value="/arm_kinect_depth_optical_frame"/>
+		
+	</node>
+
+	<!-- Start rviz -->
+	<!-- rosrun rviz rviz -d `rospack find active_vision_pkg`/rviz_cfg/test_smart_sensor.vcg -->
+	<!--
+	<node name="rviz_ss" pkg="rviz" type="rviz"
+			args="-d $(find active_vision_pkg)/rviz_cfg/test_smart_sensor.vcg"
+			respawn="false"/>
+	-->
+</launch>

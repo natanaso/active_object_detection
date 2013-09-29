@@ -1,0 +1,124 @@
+<!-- NOTE: This requires that a 2d map for localization is already available -->
+<launch>
+
+	<!-- start gazebo with the world and pr2 -->
+	<!-- <include file="$(find gazebo_simulation)/launch/simple_sim.launch"/> -->
+
+
+	<!-- Start pr2 teleop, Raise the torso and point the head slightly down -->
+	<!-- REAL -->
+	<!-- roslaunch pr2_teleop teleop_joystick.launch -->
+	<!-- SIMULATION -->
+	<include file="$(find pr2_teleop_general)/launch/pr2_teleop_general_keyboard.launch" />
+
+
+	<!-- 2d map -->
+	<arg name="map_suffix" default="pr2-table-experiment-gt"/>
+	<node pkg="map_server" name="map2d" type="map_server"
+		  args="$(find gazebo_simulation)/maps/map-$(arg map_suffix).yaml" respawn="true" >
+		<remap from="map" to="map_server_map"/>
+	</node>
+
+	<!-- localization -->
+	<node pkg="amcl" type="amcl" name="amcl" output="screen">
+		<remap from="scan" to="base_scan" />
+		<!-- Publish scans from best pose at a max of 10 Hz -->
+		<param name="base_frame_id" value="base_footprint"/>
+		<param name="odom_model_type" value="omni"/>
+		<param name="odom_alpha5" value="0.1"/>
+		<param name="transform_tolerance" value="0.2" />
+		<param name="gui_publish_rate" value="10.0"/>
+		<param name="laser_max_beams" value="30"/>
+		<param name="min_particles" value="500"/>
+		<param name="max_particles" value="5000"/>
+		<param name="kld_err" value="0.05"/>
+		<param name="kld_z" value="0.99"/>
+		<param name="odom_alpha1" value="0.2"/>
+		<param name="odom_alpha2" value="0.2"/>
+		<!-- translation std dev, m -->
+		<param name="odom_alpha3" value="0.8"/>
+		<param name="odom_alpha4" value="0.2"/>
+		<param name="laser_z_hit" value="0.5"/>
+		<param name="laser_z_short" value="0.05"/>
+		<param name="laser_z_max" value="0.05"/>
+		<param name="laser_z_rand" value="0.5"/>
+		<param name="laser_sigma_hit" value="0.2"/>
+		<param name="laser_lambda_short" value="0.1"/>
+		<param name="laser_lambda_short" value="0.1"/>
+		<param name="laser_model_type" value="likelihood_field"/>
+		<!-- <param name="laser_model_type" value="beam"/> -->
+		<param name="laser_likelihood_max_dist" value="2.0"/>
+		<param name="update_min_d" value="0.2"/>
+		<param name="update_min_a" value="0.5"/>
+		<param name="odom_frame_id" value="odom_combined"/>
+		<param name="resample_interval" value="1"/>
+		<param name="transform_tolerance" value="0.1"/>
+		<param name="recovery_alpha_slow" value="0.0"/>
+		<param name="recovery_alpha_fast" value="0.0"/>
+		<remap from="map" to="map_server_map"/>
+	</node>
+
+
+	<!-- Perception -->
+	<include file="$(find pr2_machine)/$(env ROBOT).machine" />
+
+	<node name="change_narrow_stereo_params_speckle" pkg="dynamic_reconfigure" type="dynparam"
+			args="set /narrow_stereo_textured/narrow_stereo_textured_proc speckle_size 1000" />
+
+	<node name="toggle_projector_on" pkg="dynamic_reconfigure" type="dynparam"
+			args="set camera_synchronizer_node narrow_stereo_trig_mode 3" />
+
+	<!-- self filter stereo points -->
+	<node machine="c2" pkg="robot_self_filter" type="self_filter" respawn="false" name="stereo_self_filter" 
+			output="screen">
+		<remap from="cloud_in" to="/narrow_stereo_textured/points2" />
+		<remap from="cloud_out" to="/narrow_stereo_textured/points2_filtered" />     
+		<param name="sensor_frame" type="string" value="narrow_stereo_optical_frame" />
+		<param name="subsample_value" type="double" value=".02"/>
+		<rosparam command="load" file="$(find gazebo_simulation)/config/collision_config/self_filter_right_left.yaml" />
+	</node>
+
+	<!-- octomap node -->
+	<node name="environment_server" pkg="planning_environment" type="environment_server" />
+	<node  machine="c2" name="octomap_server_combined" pkg="octomap_server" 
+			 type="octomap_server_node"  output="screen">
+		<param name="resolution" value="0.025" /> 
+		<param name="sensor_model/max_range" value="4.0" />
+
+		<param name="sensor_model/hit" value= "0.8" />
+		<param name="sensor_model/miss" value= "0.31" />
+		<param name="sensor_model/min" value= "0.12" />
+		<param name="sensor_model/max" value= "0.95" />
+
+		<param name="pointcloud_min_z" value="-0.03" />
+		<param name="pointcloud_max_z" value="2.0" />
+		<param name="occupancy_min_z" value="0.05" />
+		<param name="occupancy_max_z" value="2.0" />
+
+		<param name="filter_ground" value="True" />
+		<param name="filter_speckles" value="True" />
+		<param name="ground_filter/distance" value="0.10" />
+		<param name="ground_filter/angle" value="0.15" />
+		<param name="ground_filter/plane_distance" value="0.07" />
+
+
+		<param name="min_x_size" value="25.0" />
+		<param name="min_y_size" value="25.0" />
+
+		<remap from="cloud_in" to="/narrow_stereo_textured/points2_filtered" />
+	</node>	
+
+	<!-- Tuck the arms -->
+	<!-- rosrun pr2_tuckarm tuck_arms.py b -->
+	<!-- roslaunch pr2_tuckarm tuck_arms.launch -->
+	<include file="$(find pr2_tuckarm)/launch/tuck_arms.launch" />
+
+	<!-- rosrun rviz rviz `rospack find gazebo_simulation`/rviz_cfg/3d_map_build.vcg -->
+	<node name="rviz1" pkg="rviz" type="rviz" args="-d $(find gazebo_simulation)/rviz_cfg/3d_map_build.vcg"/>
+
+	<!-- Erase unwanted points -->
+	<!-- rosrun octomap_server octomap_eraser_cli.py min_x min_y min_z max_x max_y max_z -->
+	<!-- once done save the map as follows: -->
+	<!-- rosrun octomap_server octomap_saver map.bt -->
+
+</launch>

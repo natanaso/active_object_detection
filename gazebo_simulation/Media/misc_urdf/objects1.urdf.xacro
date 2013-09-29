@@ -1,0 +1,35 @@
+<robot name="objects1_model">
+
+  <link name="objects1">
+    <inertial>
+      <mass value="0.2" />
+      <!-- center of mass (com) is defined w.r.t. link local coordinate system -->
+      <origin xyz="0 0 0.06" /> 
+      <inertia  ixx="0.0001" ixy="0.0"  ixz="0.0"  iyy="0.0001"  iyz="0.0"  izz="0.0001" />
+    </inertial>
+    <visual>
+      <!-- visual origin is defined w.r.t. link local coordinate system -->
+      <origin xyz="0 0 0" rpy="0 0 3.14" />
+      <geometry>
+        <mesh filename="package://sushi_executive/Media/models/test_scene2_10k.dae" />
+      </geometry>
+    </visual>
+    <collision>
+      <!-- collision origin is defined w.r.t. link local coordinate system -->
+      <origin xyz="0 0 0" rpy="0 0 3.14" />
+      <geometry>
+        <mesh filename="package://sushi_executive/Media/models/test_scene2_10k.dae" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="objects1">
+    <turnGravityOff>false</turnGravityOff>
+    <mu1>100.0</mu1>
+    <mu2>100.0</mu2>
+    <kp>100000000.0</kp>
+    <kd>10000.0</kd>
+  </gazebo>
+  <gazebo>
+    <static value="true"/>
+  </gazebo>
+</robot>

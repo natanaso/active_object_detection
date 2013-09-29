@@ -1,0 +1,26 @@
+<robot name="color_testscene_grasp">
+  <link name="color_testscene_grasp">
+    <inertial>
+      <origin xyz="0 0 0.0145"/>
+      <mass value="0.1" />
+      <inertia  ixx="0.0001" ixy="0.0"  ixz="0.0"  iyy="0.0001"  iyz="0.0"  izz="0.0001" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.0145"/>
+      <geometry>        
+     <mesh filename="color_testscene_grasp.dae" scale="1 1 1"/>
+    </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.0145"/>
+      <geometry>
+        <box size="0.029 0.029 0.029"/>
+      </geometry>
+    </collision>
+  </link>
+  <!--
+  <gazebo reference="color_testscene_grasp">
+    <material>Gazebo/Gray</material>
+  </gazebo>
+  -->
+</robot>

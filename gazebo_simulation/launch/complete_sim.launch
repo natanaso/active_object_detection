@@ -1,0 +1,14 @@
+<launch>
+	<!-- start gazebo with the world and pr2 -->
+	<!-- <include file="$(find gazebo_simulation)/launch/simple_sim.launch"/> -->
+
+	<!-- Add localization, perception, and planning -->
+	<!-- colortable-sim grasp-lab--> 
+	<include file="$(find gazebo_simulation)/launch/pr2_main_functionality/pr2_main_functionality.launch">
+		<arg name="map_suffix" value="grasp-lab"/>
+	</include>
+
+	<!-- Start rviz -->
+	<!-- rosrun rviz rviz -d `rospack find gazebo_simulation`/rviz_cfg/complete_sim.vcg -->
+	<node pkg="rviz" name="rviz" type="rviz" args="-d $(find gazebo_simulation)/rviz_cfg/complete_sim.vcg" />
+</launch>

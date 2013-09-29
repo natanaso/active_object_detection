@@ -1,0 +1,28 @@
+<package>
+  <description brief="gazebo_simulation">
+
+     gazebo_simulation
+
+  </description>
+  <author>Bharath Sankaran, Nikolay Atanasov</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/gazebo_simulation</url>
+  <depend package="roscpp"/>
+  <depend package="actionlib"/>
+  <depend package="pr2_controllers_msgs"/>
+  <depend package="gazebo"/>
+  <depend package="pr2_tuckarm"/>
+  <depend package="util_pkg"/>
+  <!-- <depend package="pcl17_utils"/> -->
+  <depend package="pr2_plan_utils"/>
+  <!-- <depend package="pr2_python"/> -->
+  <!-- <depend package="pr2_tasks"/> -->
+
+  <export>
+      <gazebo gazebo_media_path="${prefix}" />
+  </export>
+
+</package>
+
+

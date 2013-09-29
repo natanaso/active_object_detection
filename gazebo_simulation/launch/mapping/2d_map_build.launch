@@ -1,0 +1,62 @@
+<launch>
+
+	<!-- REAL -->
+	<!-- roslaunch pr2_teleop teleop_joystick.launch -->
+	<!-- Use the joystick to raise the torso -->
+	<!-- Use the joystick to point the head slightly down -->
+	<!-- END REAL -->
+
+	<!-- SIMULATION -->
+	<arg name="gui" default="true"/>
+	<param name="/use_sim_time" value="true" />
+
+	<!-- start empty world and give a path to the object .dae files -->
+	<node name="gazebo" pkg="gazebo" type="gazebo" args="-u $(find gazebo_worlds)/worlds/simple_office.world"
+			respawn="false" output="screen">
+	<env name="GAZEBO_RESOURCE_PATH" value="$(find gazebo_simulation)/Media/models/" />
+	</node>
+
+	<!-- start gui -->
+	<group if="$(arg gui)">
+		<node name="gazebo_gui" pkg="gazebo" type="gui" respawn="false" output="screen"/>
+	</group>
+
+	<!-- spawn the table and the objects -->
+	<include file="$(find gazebo_simulation)/launch/spawn_objects.launch"/>
+
+  	<!-- Startup PR2 without any mechanism controllers -->
+  	<include file="$(find gazebo_simulation)/launch/pr2_no_controllers.launch" />
+
+  	<!-- Load and Start Default Controllers -->
+  	<include file="$(find pr2_controller_configuration_gazebo)/pr2_default_controllers.launch" />
+
+	<!-- Start pr2 teleop -->
+	<!-- h for head commands -->
+	<!-- y for keyboard head control -->
+	<!-- i,j,k,l to move head around -->
+	<!-- roslaunch pr2_teleop_general pr2_teleop_general_keyboard.launch -->
+	<include file="$(find pr2_teleop_general)/launch/pr2_teleop_general_keyboard.launch" />
+	<!-- END SIMULATION -->
+
+
+	<!-- tuck the arms -->
+	<!-- roslaunch pr2_tuckarm tuck_arms.launch -->
+	<include file="$(find pr2_tuckarm)/launch/tuck_arms.launch" />
+
+	<!-- rosrun rviz rviz -d `rospack find gazebo_simulation`/rviz_cfg/2d_map_build.vcg -->
+	<node name="rviz1" pkg="rviz" type="rviz" args="-d $(find gazebo_simulation)/rviz_cfg/2d_map_build.vcg"/>
+
+
+	<!-- run gmapping -->
+	<!-- rosrun gmapping slam_gmapping scan:=base_scan _odom_frame:=odom_combined -->
+	<!--
+	<node name="gmap1" pkg="gmapping" type="slam_gmapping" args="-u $(find gazebo_worlds)/worlds/empty.world" output="screen">
+		<remap from="scan" to="base_scan"/>
+		<remap from="odom_frame" to="odom_combined"/>
+	</node>
+	-->
+
+	<!-- once done save the map as follows: -->
+	<!-- rosrun map_server map_saver -->
+	<!-- the map is saved locally as map.pgm with parameters in map.yaml -->
+</launch>
