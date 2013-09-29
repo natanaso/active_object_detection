@@ -1,0 +1,32 @@
+<package>
+  <description brief="vocabulary_tree">
+
+    A generic implementation of the vocabulary tree image retrieval approach of
+    Nister and Stewenius. Can be used with any feature and distance metric.
+
+  </description>
+  <author>Patrick Mihelich</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/vocabulary_tree</url>
+  <depend package="roscpp"/>
+  <depend package="opencv2"/>
+  <!-- <depend package="planning_models"/> -->
+  
+  <export>
+    <cpp cflags="-I${prefix}/include" lflags="-L${prefix}/lib -Wl,-rpath,${prefix}/lib -lvocabulary_tree" />    
+  </export>
+  
+  <!--
+  <cpp cflags="-I${prefix}/include" lflags="-L${prefix}/lib -Wl,-rpath,${prefix}/lib -lplanning_models" />
+  -->
+  
+ <!--
+ <export>
+    <cpp cflags="`pkg-config -cflags eigen3` -I${prefix}/include `rosboost-cfg -cflags`" 
+         lflags="-L${prefix}/lib -Wl,-rpath,-L${prefix}/lib -lplanning_models"/>
+  </export>
+  -->
+</package>
+
+
