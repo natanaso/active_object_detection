@@ -1,0 +1,33 @@
+<package>
+  <description brief="planning_module">
+
+     planning_module
+
+  </description>
+  <author>Nikolay Atanasov</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/planning_module</url>
+  <depend package="roscpp"/>
+  <depend package="rospy"/>
+  <depend package="util_pkg"/>
+  <rosdep name="boost"/>
+  
+  <export>
+    <cpp cflags="-I${prefix}/appl-0.95/src/Algorithms -I${prefix}/appl-0.95/src/Algorithms/HSVI -I${prefix}/appl-0.95/src/Algorithms/SARSOP
+    			 -I${prefix}/appl-0.95/src/Bounds -I${prefix}/appl-0.95/src/Core -I${prefix}/appl-0.95/src/Evaluator
+    			 -I${prefix}/appl-0.95/src/MathLib -I${prefix}/appl-0.95/src/miniposix -I${prefix}/appl-0.95/src/Models/MOMDP
+    			 -I${prefix}/appl-0.95/src/MOMDP/CoLoc  -I${prefix}/appl-0.95/src/OfflineSolver -I${prefix}/appl-0.95/src/Parser
+    			 -I${prefix}/appl-0.95/src/Parser/POMDPX -I${prefix}/appl-0.95/src/Parser/Cassandra -I${prefix}/appl-0.95/src/Parser/Cassandra/include
+    			 -I${prefix}/appl-0.95/src/PolicyGraph -I${prefix}/appl-0.95/src/PomdpConvertor -I${prefix}/appl-0.95/src/Simulator
+    			 -I${prefix}/appl-0.95/src/MUtils -I${prefix}/include"
+    	 lflags="-L${prefix}/lib -Wl,-rpath,${prefix}/lib -lsarsop_user -lejs_planner -lgmi_planner -lcvp_planner"/>
+  </export>
+  
+  <!--
+  lflags="-L${prefix}/appl-0.95/src -Wl,-rpath,${prefix}/appl-0.95/src -lappl"
+  -->
+  
+</package>
+
+
